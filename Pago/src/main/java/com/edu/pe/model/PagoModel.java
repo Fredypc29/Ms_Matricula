@@ -9,8 +9,7 @@ import jakarta.persistence.*;
 public class PagoModel {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPagos")
-    @SequenceGenerator(name = "seqPagos", allocationSize = 1, sequenceName = "SEQ_PAGOS")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pago")
 	private Integer id;
 	
