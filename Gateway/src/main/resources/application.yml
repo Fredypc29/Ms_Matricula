@@ -43,7 +43,7 @@ spring:
         filters:
           - StripPrefix=1
           - JwtAuthenticationFilter
-      - id: appseguridad
+      - id: appsecuridad
         uri: http://localhost:84
         predicates:
           - Path=/seguridad/**
