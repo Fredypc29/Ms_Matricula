@@ -1,0 +1,58 @@
+server:
+  port: 80
+
+jwt:
+  secret: Key#SuperSecret$PolyglotTest#JavaMicroservices#940527000
+
+spring:
+  application:
+    name: appgateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: apppersonas
+          uri: http://app-personas:81
+          predicates:
+            - Path=/personas/**
+          filters:
+            - StripPrefix=1
+            - JwtAuthenticationFilter
+        - id: appcursos
+          uri: http://app-cursos:82
+          predicates:
+            - Path=/materia/**
+          filters:
+            - StripPrefix=1
+            - JwtAuthenticationFilter
+        - id: appmatricula
+          uri: http://app-matricula:83
+          predicates:
+            - Path=/matricula/**
+          filters:
+            - StripPrefix=1
+            - JwtAuthenticationFilter
+        - id: appseguridad
+          uri: http://app-security:84
+          predicates:
+            - Path=/seguridad/**
+          filters:
+            - StripPrefix=1
+        - id: apppago
+          uri: http://app-pago:85
+          predicates:
+            - Path=/pagos/**
+          filters:
+            - StripPrefix=1
+            - JwtAuthenticationFilter
